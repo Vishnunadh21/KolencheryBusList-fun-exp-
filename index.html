@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kolenchery Bus Finder</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      color: #fff;
+      overflow-y: auto;
+      padding: 2rem 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem;
+      border-radius: 25px;
+      text-align: center;
+      width: 90%;
+      max-width: 650px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fffbeb;
+      margin-bottom: 1rem;
+    }
+
+    .subtext {
+      font-size: 1rem;
+      color: #fef9c3;
+      margin-bottom: 1.5rem;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    select {
+      background: #f9fafb;
+      color: #333;
+    }
+
+    button {
+      background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    .result {
+      margin-top: 2rem;
+      text-align: left;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .bus-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .bus-card:hover {
+      transform: scale(1.02);
+    }
+
+    .bus-card h2 {
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .bus-card p {
+      color: #f3f4f6;
+      line-height: 1.6;
+      margin: 2px 0;
+    }
+
+    .bus-image {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🚍 Kolenchery Bus Finder</h1>
+    <p class="subtext">Find your next bus — fast, simple & colorful</p>
+
+    <p><strong>Start:</strong> Kolenchery</p>
+
+    <select id="destination">
+      <option value="">Select Destination</option>
+      <option value="chottanikkara">Chottanikkara</option>
+      <option value="karukappilly">Karukappilly</option>
+      <option value="mulanthuruthy">Mulanthuruthy</option>
+      <option value="perumbavoor">Perumbavoor</option>
+       <option value="piravom">Piravom</option>
+      <option value="perumbavoor">Thammanimattom</option>
+      <option value="thiruvaniyoor">Thiruvaniyoor</option>
+    </select>
+
+    <button onclick="showBusInfo()">Show Bus Details</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const busData = {
+      thiruvaniyoor: [
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "ST.GEORGE", time: "7:40 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
+        { name: "YATHRA", time: "8:10 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
+        { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
+        { name: "KASTHOORI", time: "11:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
+        { name: "THREE KINGS", time: "2:00 PM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "threekings.jpg" },
+        { name: "ST.GEORGE", time: "3:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
+        { name: "YATHRA", time: "4:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
+        { name: "BLESSING", time: "5:00 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Thalacode → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura", image: "blessing.jpg" },
+        { name: "KASTHOORI", time: "6:05 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
+    ],
+
+    chottanikkara: [
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "ST.GEORGE", time: "7:40 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
+        { name: "YATHRA", time: "8:10 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
+        { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
+        { name: "THREE KINGS", time: "2:00 PM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "threekings.jpg" },
+        { name: "ST.GEORGE", time: "3:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
+        { name: "YATHRA", time: "4:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
+        { name: "BLESSING", time: "5:00 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Thalacode → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura", image: "blessing.jpg" },
+    ],
+
+    mulanthuruthy: [
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
+        { name: "KASTHOORI", time: "11:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
+        { name: "KASTHOORI", time: "6:05 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
+    ],
+
+      piravom: [
+        { name: "Piravom Deluxe", time: "10:00 AM", route: "Kolenchery → Pattimattom → Muvattupuzha → Piravom", image: "ksrtckply.jpg" }
+      ],
+      karukappilly: [
+        { name: "KSRTC", time: "8:40 AM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
+        { name: "KSRTC", time: "1:10 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
+        { name: "KSRTC", time: "3:40 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
+        { name: "KSRTC", time: "6:00 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
+        { name: "Alankar", time: "6:50 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "alankar.jpeg" }
+      ],
+      perumbavoor: [
+        { name: "Perumbavoor Shuttle", time: "7:30 AM", route: "Kolenchery → Pattimattom → Vengola → Perumbavoor", image: "ksrtckply.jpg" }
+      ]
+    };
+
+    function showBusInfo() {
+      const dest = document.getElementById("destination").value;
+      const resultDiv = document.getElementById("result");
+
+      if (!dest) {
+        resultDiv.innerHTML = "<p>Please select a destination first.</p>";
+        return;
+      }
+
+      const buses = busData[dest];
+      let html = "";
+
+      buses.forEach(bus => {
+        html += `
+          <div class="bus-card">
+            <h2>${bus.name}</h2>
+            <p><strong>🕒 Time:</strong> ${bus.time}</p>
+            <p><strong>🛣️ Route:</strong> ${bus.route}</p>
+            <img src="${bus.image}" alt="Bus Image" class="bus-image">
+          </div>
+        `;
+      });
+
+      resultDiv.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
