@@ -149,10 +149,11 @@
 
     <select id="destination">
       <option value="">Select Destination</option>
+      <option value="aluva">Aluva</option>
       <option value="chottanikkara">Chottanikkara</option>
       <option value="karukappilly">Karukappilly</option>
+      <option value="kothamangalam">Kothamangalam</option>
       <option value="mulanthuruthy">Mulanthuruthy</option>
-      <option value="perumbavoor">Perumbavoor</option>
        <option value="piravom">Piravom</option>
       <option value="thammanimattom">Thammanimattom</option>
       <option value="thiruvaniyoor">Thiruvaniyoor</option>
@@ -166,7 +167,7 @@
   <script>
     const busData = {
       thiruvaniyoor: [
-        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpeg" },
         { name: "ST.GEORGE", time: "7:40 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
         { name: "YATHRA", time: "8:10 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
         { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
@@ -179,7 +180,7 @@
     ],
 
     chottanikkara: [
-        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpeg" },
         { name: "ST.GEORGE", time: "7:40 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "st.george.jpg" },
         { name: "YATHRA", time: "8:10 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara", image: "yathra.jpg" },
         { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
@@ -190,7 +191,7 @@
     ],
 
     mulanthuruthy: [
-        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpg" },
+        { name: "S.M.S", time: "7:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Chottanikkara → Kureekkad → Puthiyakaavu → Thrippunithura → Kadavanthra → Kaloor", image: "sms.jpeg" },
         { name: "THREE KINGS", time: "9:45 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → Vandipetta → Sasthamughal → Thiruvankulam → Chottanikkara → Mulanthuruthy", image: "threekings.jpg" },
         { name: "KASTHOORI", time: "11:15 AM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
         { name: "KASTHOORI", time: "6:05 PM", route: "Kolenchery → Choondy → Meempara → Thiruvaniyoor → OEN → Vettickal → Mulanthuruthy → Kanjiramattom → Arayankavu → Kanjiramattom", image: "kasthoori.jpg" },
@@ -199,13 +200,6 @@
       piravom: [
         { name: "Piravom Deluxe", time: "10:00 AM", route: "Kolenchery → Pattimattom → Muvattupuzha → Piravom", image: "ksrtckply.jpg" }
       ],
-     thammanimattom: [
-        { name: "KSRTC", time: "07:20 AM", route: "Kolenchery → Kottor → Parekkattil Kavala → Thammanimattom → Ramamangalam  → Kakkad → Piravom → Peruva → Kaduthuruthy → Ettumanoor → Kottayam → Changanassery", image: "ksrtcng.jpg" },
-        { name: "KSRTC", time: "07:20 AM", route: "Kolenchery → Kottor → Parekkattil Kavala → Thammanimattom", image: "brothers.jpg"},
-        { name: "KSRTC", time: "07:20 AM", route: "Kolenchery → Kottor → Parekkattil Kavala → Thammanimattom → Ramamangalam → Elambassery Pady → Kizhumuri Pallithazham → Kakkad → Piravom", image:"ksrtcthm.jpg"}
-      
-     ],
-      
       karukappilly: [
         { name: "KSRTC", time: "8:40 AM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
         { name: "KSRTC", time: "1:10 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
@@ -213,8 +207,16 @@
         { name: "KSRTC", time: "6:00 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "ksrtckply.jpeg" },
         { name: "Alankar", time: "6:50 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Karukappilly", image: "alankar.jpeg" }
       ],
-      perumbavoor: [
-        { name: "Perumbavoor Shuttle", time: "7:30 AM", route: "Kolenchery → Pattimattom → Vengola → Perumbavoor", image: "ksrtckply.jpg" }
+      thammanimattom: [
+        { name: "KSRTC", time: "7:20 AM", route: "Kolenchery → Kottor → Parekkatil Kavala → Thammanimattom → Ramamangalam → Kakkad → Piravom → Peruva → Kaduthuruthy → Ettumanoor → Kottayam", image: "ksrtccng.jpeg" },
+        { name: "BROTHERS", time: "4:40 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Thammanimattom", image: "brothers.jpg" },
+        { name: "KSRTC", time: "5:40 PM", route: "Kolenchery → Kottoor Pally → Parekkattil Kavala → Thammanimattom → Ramamangalam → Elambassery Pady → Kizhumuri Pallithazham →  Kakkad → Piravom", image: "ksrtcthm.jpg" }, 
+      ],
+
+       kothamangalam: [
+        { name: "KSRTC", time: "6:10 AM", route: "Kolenchery → Valakom → Muvattupuzha → Kothamangalam → Neriamangalam → Adimali → Anachal → Munnar → Marayoor → Chinnar → Udumelpettai", image: "ksrtcktmglm.jpeg" },
+        { name: "KASTHOORI", time: "7:45 AM", route: "Kolenchery → Pattimattom → Arackapady → Vengola → Allapra → Perumbavoor → Kuruppumpady → Odakkali → Kothamangalam", image: "kasthoori.jpg" },
+        { name: "KASTHOORI", time: "3:00 PM", route: "Kolenchery → Pattimattom → Arackapady → Vengola → Allapra → Perumbavoor → Kuruppumpady → Odakkali → Kothamangalam", image: "kasthoori.jpg" }
       ]
     };
 
@@ -246,4 +248,3 @@
   </script>
 </body>
 </html>
-
